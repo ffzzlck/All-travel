@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}     
+
+{% for title in titles %}
+<div class="hero-wrap" style="background-image: url({{title.image.url}});" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="overlay-2"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center">
+            <div class="col-md-7 ftco-animate d-flex align-items-end">
+                <div class="text w-100">
+                    <h1 class="mb-4">{{title.title}}</h1>
+                    <p class="mb-4">{{title.content|safe}}</p>
+                    <p><a href="/contact/" class="btn btn-primary py-3 px-4">ОСТАВИТЬ ЗАЯВКУ</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mouse">
+        <a href="#" class="mouse-icon">
+            <div class="mouse-wheel"><span class="fa fa-chevron-down"></span></div>
+        </a>
+    </div>
+</div>
+{% endfor %}
+<section class="ftco-section ftco-fullwidth goto-here">
+    <div class="overlay"></div>
+    {% for title in reason_titles %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 heading-section text-center ftco-animate mb-5">
+                <span class="subheading">ALLTRAVEL</span>
+                <h2 class="mb-2">{{title.title}}</h2>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="container-fluid px-0">
+        <div class="row d-sm-flex text-wrapper align-items-stretch">
+           {% for image in reason_images %}
+            <div class="one-half mb-md-0 mb-4 img d-flex align-self-stretch"
+                    style="background-image: url({{image.image.url}})"></div>
+           {% endfor %}
+            <div class="one-half half-text d-flex justify-content-end align-items-center">
+                <div class="text-inner pt-md-5 pl-md-5">
+                    <div class="row d-flex">
+                        {% for reason in reasons %}
+                        <div class="col-md-12 d-flex align-self-stretch ftco-animate">
+                            <div class="media block-6 services-wrap d-flex">
+                                <img src="{{reason.icon.url}}" height="60" width="60">
+                                <div class="media-body pl-4">
+                                    <h3>{{reason.title}}</h3>
+                                    <p>{{reason.content|safe}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="ftco-section ftco-no-pb bg-light">
+    <div class="container">
+        <div class="row justify-content-center pb-5 mb-3">
+            <div class="col-md-7 heading-section text-center ftco-animate">
+                <span class="subheading">ALLTRAVEL</span>
+                <h2>ALLTRAVEL</h2>
+            </div>
+        </div>
+        <div class="row no-gutters">
+            {% for faq in faqs %}
+            <div class="col-md-4 d-flex align-items-stretch ftco-animate">
+                <div class="services-2">
+                    <span class="number">0{{faq.id}}</span>
+                    <h2>{{faq.title}}</h2>
+                    <div class="text">
+                        <p>{{faq.content|safe}}</p>
+                        <img src="{{faq.icon.url}}" height="60" width="60">
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% for question in questions %}
+<section class="ftco-appointment ftco-section ftco-no-pt ftco-no-pb img"
+         style="background-image: url({{question.image.url}});">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row d-md-flex justify-content-end">
+            <div class="col-md-12 col-lg-6 half p-3 py-5 pl-lg-5 ftco-animate">
+                <h2 class="mb-4">{{question.title}}</h2>
+                <form method="post">
+                     {% csrf_token%}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+<!--                                <input type="text" class="form-control" placeholder="Ismingiz">-->
+                                {{form.name}}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+<!--                                <input type="text" class="form-control" placeholder="Email">-->
+                                {{form.phone}}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+<!--                                <textarea name="" id="" cols="30" rows="7" class="form-control"-->
+<!--                                          placeholder="Text"></textarea>-->
+                                {{form.message}}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="submit" value="Отправить" class="btn btn-primary py-3 px-4">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endfor %}
+
+{% endblock %}

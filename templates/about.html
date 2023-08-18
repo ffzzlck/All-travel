@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% for title in titles %}
+<div class="hero-wrap hero-wrap-2" style="background-image: url({{title.image.url}});"
+     data-stellar-background-ratio="0.5">
+
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-end justify-content-center">
+            <div class="col-md-9 ftco-animate mb-5 text-center">
+                <h1 class="mb-3 bread">О КОМПАНИИ</h1>
+                <p class="breadcrumbs"><span class="mr-2"><a href="/">ГЛАВНАЯ<i
+                        class="fa fa-chevron-right"></i></a></span> <span>О КОМПАНИИ<i
+                        class="fa fa-chevron-right"></i></span></p>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<!--<section class="ftco-counter ftco-section ftco-no-pt ftco-no-pb img bg-light" id="section-counter">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">-->
+<!--                <div class="block-18 py-4 mb-4">-->
+<!--                    <div class="text align-items-center">-->
+<!--                        <strong class="number" data-number="7657">0</strong>-->
+<!--                        <span>Our Satisfied &amp; Happy Customers</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">-->
+<!--                <div class="block-18 py-4 mb-4">-->
+<!--                    <div class="text align-items-center">-->
+<!--                        <strong class="number" data-number="30">0</strong>-->
+<!--                        <span>Years of Experience In Business</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">-->
+<!--                <div class="block-18 py-4 mb-4">-->
+<!--                    <div class="text align-items-center">-->
+<!--                        <strong class="number" data-number="1000">0</strong>-->
+<!--                        <span>Virtual Assistants Are Helping Customers</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">-->
+<!--                <div class="block-18 py-4 mb-4">-->
+<!--                    <div class="text align-items-center">-->
+<!--                        <strong class="number" data-number="5050">0</strong>-->
+<!--                        <span>Hours Saved For Our Clients</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+
+<section class="ftco-section ftco-no-pb ftco-no-pt">
+    <div class="container">
+        {% for about in companies %}
+        <div class="row">
+            <div class="col-md-6 img img-3 d-flex justify-content-center align-items-center"
+                 style="background-image: url({{about.image.url}});">
+            </div>
+            <div class="col-md-6 wrap-about pl-md-5 ftco-animate py-md-5">
+                <div class="heading-section pt-md-4">
+                    <h2 class="mb-4">{{about.title|safe}}</h2>
+                    <p>{{about.content|safe}}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+
+<section class="ftco-section testimony-section">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
+                <span class="subheading">ALLTRAVEL</span>
+                <h2 class="mb-3">Наше Преимущество</h2>
+            </div>
+        </div>
+        <div class="row ftco-animate">
+            <div class="col-md-12">
+                <div class="carousel-testimony owl-carousel ftco-owl">
+                    {% for contract in contracts %}
+                    <div class="item">
+                        <div class="testimony-wrap py-4">
+                            <div class="icon d-flex align-items-center justify-content-center">
+                                <img src="{% static 'images/2022-11-22 22.09.24.png' %}" height="40"></div>
+                            <div class="text">
+                                <p class="mb-4">{{contract.content|safe}}</p>
+                                <div class="d-flex align-items-center">
+                                    <div class="user-img" style="background-image: url({{contract.image.url}})"></div>
+                                    <div class="pl-3">
+                                        <p class="name">{{contract.name}}</p>
+                                        <span class="position">{{contract.service}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% for question in questions %}
+<section class="ftco-appointment ftco-section ftco-no-pt ftco-no-pb img"
+         style="background-image: url({{question.image.url}});">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row d-md-flex justify-content-end">
+            <div class="col-md-12 col-lg-6 half p-3 py-5 pl-lg-5 ftco-animate">
+                <h2 class="mb-4">{{question.title}}</h2>
+                <form method="post">
+                     {% csrf_token%}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+<!--                                <input type="text" class="form-control" placeholder="Ismingiz">-->
+                                {{form.name}}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+<!--                                <input type="text" class="form-control" placeholder="Email">-->
+                                {{form.phone}}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+<!--                                <textarea name="" id="" cols="30" rows="7" class="form-control"-->
+<!--                                          placeholder="Text"></textarea>-->
+                                {{form.message}}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="submit" value="Отправить" class="btn btn-primary py-3 px-4">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endfor %}
+
+{% endblock %}
